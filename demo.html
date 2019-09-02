@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button id='downloadExcle'>点击下载excel</button>
+<script>
+    document.getElementById('downloadExcel').onclick = function() {
+        fetch('http://localhost:3000/download/excel', {
+            method: 'POST'
+        })
+            .then(res => res.blob())
+            .then(blob => {
+                const link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = 'sensitive.xlsx';
+                link.click();
+                window.URL.revokeObjectURL(link.href);
+            })
+    }
+</script>
+</body>
+</html>
